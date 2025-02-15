@@ -103,11 +103,14 @@
         const titles = {
             1: 'Принцесса и Ушлий: Фокусы прошлого',
             2: 'Принцесса и Ушлий: Смерть Ювелира',
-            3: 'Принцесса и Ушлый: Смерть на празднике'
+            3: 'Принцесса и Ушлый: Смерть на празднике',
+            4: 'Принцесса и Ушлый: Любовь и Мошенничество',
+            5: 'Принцесса и Ушлый: Лопухи в фиолетовой раме',
+            6: 'Принцесса и Ушлый: Тайна отравленым пирожных'
         };
 
         function loadContent() {
-            const totalContent = 3;
+            const totalContent = 6;
             for (let i = 1; i <= totalContent; i++) {
                 const container = document.createElement('div');
                 container.classList.add('image-text-container');
@@ -151,12 +154,6 @@
                 container.appendChild(textContainer);
                 document.body.appendChild(container);
             }
-
-            // Додаємо псевдонім на кінець
-            const footer = document.createElement('div');
-            footer.classList.add('footer');
-            footer.innerText = 'By Awi';
-            document.body.appendChild(footer);
         }
 
         document.addEventListener('DOMContentLoaded', loadContent);
