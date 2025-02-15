@@ -4,34 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Princesses And Ushlii</title>
-
-    <script src="images\loader.js"> </script>
-    <script src="texts\loader.js"> </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+            background: linear-gradient(180deg, #003366, #004080, #00509E, #004080, #003366);
+            color: white;
+            animation: backgroundAnimation 30s infinite alternate;
+        }
+        .image-text-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .image-text-container img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 30px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+        }
+        .text-container {
+            margin: 20px;
+            padding: 15px;
+            width: 80%;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            display: none;
+            text-align: left;
+        }
+        .text-container p {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .toggle-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0099FF;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .toggle-button:hover {
+            background-color: #0077CC;
+        }
+    </style>
+    <script>
+        function loadContent() {
+            const totalContent = 3;
+            for (let i = 1; i <= totalContent; i++) {
+                const container = document.createElement('div');
+                container.classList.add('image-text-container');
+                
+                const img = document.createElement('img');
+                img.src = `images/${i}.jpg`;
+                img.alt = `Image ${i}`;
+                img.width = 927 / 2;
+                img.height = 1200 / 2;
+                container.appendChild(img);
+                
+                const textContainer = document.createElement('div');
+                textContainer.classList.add('text-container');
+                textContainer.id = `text-${i}`;
+                
+                fetch(`texts/${i}.txt`)
+                    .then(response => response.text())
+                    .then(text => {
+                        const paragraph = document.createElement('p');
+                        text = text.replace(/\n/g, '<br>');
+                        paragraph.innerHTML = text;
+                        textContainer.appendChild(paragraph);
+                    })
+                    .catch(error => console.error('Error loading text:', error));
+                
+                const button = document.createElement('button');
+                button.classList.add('toggle-button');
+                button.innerText = 'Показати текст';
+                button.onclick = () => {
+                    const isVisible = textContainer.style.display === 'block';
+                    textContainer.style.display = isVisible ? 'none' : 'block';
+                    button.innerText = isVisible ? 'Показати текст' : 'Сховати текст';
+                };
+                
+                container.appendChild(button);
+                container.appendChild(textContainer);
+                document.body.appendChild(container);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadContent);
+    </script>
 </head>
 <body>
-    <script>
-        function sanitizeInput(input) {
-            return input.replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#x27;")
-                .replace(/`/g, "&#x60;")
-                .replace(/&/g, "&amp;");
-        }
-        function protectInputs() {
-            const inputs = document.querySelectorAll('input, textarea');
-    
-            inputs.forEach(input => {
-                input.addEventListener('input', (event) => {
-                    event.target.value = sanitizeInput(event.target.value);
-                });
-            });
-        }
-        document.addEventListener('DOMContentLoaded', protectInputs);
-    </script>
-
-    <div class='textContainer'></div>
-    <div class='imageContainer'></div>
-    
 </body>
 </html>
