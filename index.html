@@ -6,6 +6,26 @@
     <title>Princesses And Ushlii</title>
 </head>
 <body>
+    <script>
+        function sanitizeInput(input) {
+            return input.replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#x27;")
+                .replace(/`/g, "&#x60;")
+                .replace(/&/g, "&amp;");
+        }
+        function protectInputs() {
+            const inputs = document.querySelectorAll('input, textarea');
+    
+            inputs.forEach(input => {
+                input.addEventListener('input', (event) => {
+                    event.target.value = sanitizeInput(event.target.value);
+                });
+            });
+        }
+        document.addEventListener('DOMContentLoaded', protectInputs);
+    </script>
 
 </body>
 </html>
