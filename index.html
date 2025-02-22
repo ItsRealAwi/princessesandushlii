@@ -1,10 +1,9 @@
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Princesses And Ushlii</title>
-    <link rel="icon" href="images/favicon.ico">
     <style>
         body {
             margin: 0;
@@ -31,15 +30,12 @@
                 opacity: 1;
             }
         }
-        @keyframes fadeInElement {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .banner {
+            width: 100%;
+            max-width: 1280px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
         .image-text-container {
             width: 100%;
@@ -47,7 +43,6 @@
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
-            animation: fadeInElement 1s forwards;
         }
         .image-text-container img {
             max-width: 90%;
@@ -64,16 +59,10 @@
             background-color: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
             backdrop-filter: blur(8px);
-            word-wrap: break-word;
-            overflow-wrap: break-word;
             display: none;
             text-align: left;
             opacity: 0;
-            animation: fadeInElement 1s forwards;
-        }
-        .text-container p {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            animation: fadeIn 1s forwards;
         }
         .toggle-button {
             margin-top: 10px;
@@ -85,22 +74,12 @@
             border: none;
             border-radius: 12px;
             transition: 0.3s;
-            opacity: 0;
-            animation: fadeInElement 1s forwards;
         }
         .toggle-button:hover {
             background-color: #0077CC;
         }
-        .footer {
-            margin-top: 30px;
-            font-size: 18px;
-            color: #CCCCCC;
-            font-style: italic;
-            animation: fadeInElement 1s forwards;
-        }
     </style>
     <script>
-        // Словник з назвами для кожного елементу
         const titles = {
             1: 'Принцесса и Ушлий: Смерть Ювелира',
             2: 'Принцесса и Ушлий: Фокусы прошлого',
@@ -116,7 +95,6 @@
                 const container = document.createElement('div');
                 container.classList.add('image-text-container');
                 
-                // Додаємо назву перед зображенням
                 const title = document.createElement('h2');
                 title.innerText = titles[i];
                 container.appendChild(title);
@@ -124,8 +102,6 @@
                 const img = document.createElement('img');
                 img.src = `images/${i}.jpg`;
                 img.alt = `Image ${i}`;
-                img.width = 927 / 2;
-                img.height = 1200 / 2;
                 container.appendChild(img);
                 
                 const textContainer = document.createElement('div');
@@ -136,8 +112,7 @@
                     .then(response => response.text())
                     .then(text => {
                         const paragraph = document.createElement('p');
-                        text = text.replace(/\n/g, '<br>');
-                        paragraph.innerHTML = text;
+                        paragraph.innerHTML = text.replace(/\n/g, '<br>');
                         textContainer.appendChild(paragraph);
                     })
                     .catch(error => console.error('Error loading text:', error));
@@ -161,7 +136,7 @@
     </script>
 </head>
 <body>
-    <H1>Создатель книг: Дмитрий Фастовский</H1>
+    <h1>Автор книги: Дмитрий Фастовский</h1>
+    <img class="banner" src="acdzx.jpg" alt="Banner">
 </body>
 </html>
-
